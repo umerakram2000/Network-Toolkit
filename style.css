@@ -1,79 +1,102 @@
 body{
-margin:0;
-font-family:Arial;
-background:#f4f6ff;
+  margin:0;
+  font-family:Arial;
+  background:#f5f7ff;
+  color:#111;
 }
 
-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px;
-background:#1e40af;
-color:white;
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  background:linear-gradient(90deg,#1e40af,#7c3aed);
+  color:white;
 }
 
-.menu{
-display:flex;
-gap:10px;
-padding:10px;
-flex-wrap:wrap;
-background:#eef2ff;
+.hero{
+  text-align:center;
+  padding:30px 15px;
 }
 
-button{
-padding:10px;
-border:none;
-border-radius:6px;
-background:#2563eb;
-color:white;
-cursor:pointer;
+.hero h1{
+  margin-bottom:5px;
 }
 
-.container{
-padding:15px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+  padding:20px;
+}
+
+.card{
+  background:white;
+  padding:18px;
+  border-radius:12px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:0.2s;
+}
+
+.card:hover{
+  transform:scale(1.03);
+}
+
+.tool-box{
+  padding:20px;
 }
 
 .tool{
-display:none;
-background:white;
-padding:15px;
-border-radius:10px;
-margin-top:10px;
-box-shadow:0 6px 15px rgba(0,0,0,0.1);
+  display:none;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
 .tool.active{
-display:block;
+  display:block;
 }
 
 input{
-width:100%;
-padding:10px;
-margin:6px 0;
-border:1px solid #ccc;
-border-radius:6px;
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+button{
+  padding:10px 14px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 .info{
-background:#e0e7ff;
-padding:10px;
-border-left:4px solid #2563eb;
-font-size:14px;
-border-radius:6px;
+  background:#eef2ff;
+  padding:10px;
+  border-left:4px solid #2563eb;
+  margin:10px 0;
+  border-radius:6px;
+  font-size:14px;
 }
 
 /* DARK MODE */
 .dark{
-background:#0f172a;
-color:white;
+  background:#0f172a;
+  color:white;
 }
 
+.dark .card,
 .dark .tool{
-background:#1e293b;
-color:white;
+  background:#1e293b;
+  color:white;
 }
 
-.dark .menu{
-background:#111827;
+.dark .info{
+  background:#0b1220;
 }
