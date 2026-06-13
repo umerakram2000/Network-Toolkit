@@ -8,7 +8,7 @@ function calcSubnet(){
   let p = parseInt(document.getElementById("prefix").value);
   let hosts = Math.pow(2,32-p)-2;
   document.getElementById("subnetResult").innerHTML =
-    "Hosts: " + hosts;
+    "Usable Hosts: " + hosts;
 }
 
 /* DBM */
@@ -51,7 +51,7 @@ function calcSolar(){
   let size = (units/30)/sun;
 
   document.getElementById("solarResult").innerHTML =
-    size.toFixed(2)+" kW system needed";
+    size.toFixed(2)+" kW required";
 }
 
 /* DARK MODE */
