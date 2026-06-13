@@ -4,13 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Network Engineer Toolkit | Subnet, Fiber, Solar Calculators</title>
+<title>Network Toolkit - Free Engineering Tools</title>
 
-<meta name="description" content="Free professional toolkit for network engineers: subnet calculator, fiber loss, dBm converter, BMI calculator, solar sizing tool.">
-
-<meta name="keywords" content="subnet calculator, fiber loss calculator, dBm converter, solar calculator, BMI calculator, network tools">
-
-<meta name="author" content="Network Toolkit">
+<meta name="description" content="Free tools for network engineers: subnet calculator, fiber loss, dBm converter, BMI calculator, solar sizing tool.">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -18,44 +14,52 @@
 <body>
 
 <header class="header">
-  <h1>Network Engineer Toolkit</h1>
-  <button onclick="toggleDarkMode()">🌙</button>
+  <div class="logo">Network Toolkit</div>
+  <button onclick="toggleDarkMode()">Dark Mode</button>
 </header>
 
-<nav class="nav">
-  <button onclick="showTool('home')">Home</button>
-  <button onclick="showTool('subnet')">Subnet</button>
-  <button onclick="showTool('fiber')">Fiber</button>
-  <button onclick="showTool('dbm')">dBm</button>
-  <button onclick="showTool('bmi')">BMI</button>
-  <button onclick="showTool('solar')">Solar</button>
-</nav>
-
-<main class="container">
-
-<!-- HOME -->
-<section id="home" class="tool active">
-  <h2>Professional Network Toolkit</h2>
-  <p>All essential engineering calculators in one place.</p>
-
-  <div class="grid">
-    <div class="card">Subnet Calculator</div>
-    <div class="card">Fiber Loss Tool</div>
-    <div class="card">dBm Converter</div>
-    <div class="card">BMI Checker</div>
-    <div class="card">Solar Sizing Tool</div>
-  </div>
+<!-- HERO -->
+<section class="hero">
+  <h1>Engineering Tools in One Place</h1>
+  <p>Subnetting, Fiber, dBm, BMI and Solar calculators — simple and fast.</p>
 </section>
 
-<!-- SUBNET -->
-<section id="subnet" class="tool">
+<!-- TOOL CARDS -->
+<section class="grid">
+
+  <div class="card" onclick="showTool('subnet')">
+    Subnet Calculator
+  </div>
+
+  <div class="card" onclick="showTool('fiber')">
+    Fiber Loss Tool
+  </div>
+
+  <div class="card" onclick="showTool('dbm')">
+    dBm Converter
+  </div>
+
+  <div class="card" onclick="showTool('bmi')">
+    BMI Calculator
+  </div>
+
+  <div class="card" onclick="showTool('solar')">
+    Solar Calculator
+  </div>
+
+</section>
+
+<!-- TOOLS -->
+
+<div class="tool-box">
+
+<section id="subnet" class="tool active">
   <h2>Subnet Calculator</h2>
-  <input id="prefix" type="number" placeholder="CIDR (e.g. 24)">
+  <input id="prefix" type="number" placeholder="CIDR e.g. 24">
   <button onclick="calcSubnet()">Calculate</button>
   <div id="subnetResult"></div>
 </section>
 
-<!-- FIBER -->
 <section id="fiber" class="tool">
   <h2>Fiber Loss Calculator</h2>
   <input id="distance" type="number" placeholder="Distance (km)">
@@ -64,7 +68,6 @@
   <div id="fiberResult"></div>
 </section>
 
-<!-- DBM -->
 <section id="dbm" class="tool">
   <h2>dBm Converter</h2>
   <input id="dbmInput" type="number" placeholder="dBm">
@@ -72,7 +75,6 @@
   <div id="dbmResult"></div>
 </section>
 
-<!-- BMI -->
 <section id="bmi" class="tool">
   <h2>BMI Calculator</h2>
   <input id="weight" type="number" placeholder="Weight (kg)">
@@ -81,19 +83,18 @@
   <div id="bmiResult"></div>
 </section>
 
-<!-- SOLAR -->
 <section id="solar" class="tool">
-  <h2>Solar System Calculator</h2>
-  <input id="bill" type="number" placeholder="Monthly bill (PKR)">
+  <h2>Solar Calculator</h2>
+  <input id="bill" type="number" placeholder="Bill (PKR)">
   <input id="sunHours" type="number" placeholder="Sun hours/day">
   <button onclick="calcSolar()">Calculate</button>
   <div id="solarResult"></div>
 </section>
 
-</main>
+</div>
 
 <footer class="footer">
-  <p>© 2026 Network Engineer Toolkit | Free Engineering Tools</p>
+  <p>© 2026 Network Toolkit</p>
 </footer>
 
 <script src="script.js"></script>
