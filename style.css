@@ -1,7 +1,7 @@
 body{
   margin:0;
-  font-family:Inter, sans-serif;
-  background:#f5f7ff;
+  font-family:Arial;
+  background:#f4f7ff;
   color:#111;
 }
 
@@ -9,38 +9,29 @@ body{
   display:flex;
   justify-content:space-between;
   padding:15px;
-  background:linear-gradient(90deg,#2563eb,#7c3aed);
+  background:linear-gradient(90deg,#1e3a8a,#7c3aed);
   color:white;
 }
 
 .hero{
   text-align:center;
-  padding:35px 20px;
-}
-
-.hero h1{
-  font-size:28px;
+  padding:30px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
+  gap:12px;
   padding:20px;
 }
 
 .card{
   background:white;
-  padding:20px;
+  padding:18px;
   border-radius:12px;
   text-align:center;
   cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
-  transition:0.2s;
-}
-
-.card:hover{
-  transform:scale(1.04);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
 .tool-box{
@@ -52,7 +43,7 @@ body{
   background:white;
   padding:20px;
   border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
 }
 
 .tool.active{
@@ -63,12 +54,10 @@ input{
   width:100%;
   padding:10px;
   margin:8px 0;
-  border-radius:8px;
-  border:1px solid #ddd;
 }
 
 button{
-  padding:10px 15px;
+  padding:10px;
   background:#2563eb;
   color:white;
   border:none;
@@ -80,8 +69,8 @@ button{
   background:#eef2ff;
   padding:10px;
   border-left:4px solid #2563eb;
+  margin:8px 0;
   border-radius:6px;
-  font-size:14px;
 }
 
 .dark{
