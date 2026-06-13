@@ -4,47 +4,51 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Network Toolkit - Free Engineering Tools</title>
+<title>NetTools Pro | Network Engineering Toolkit</title>
 
-<meta name="description" content="Free tools for network engineers: subnet calculator, fiber loss, dBm converter, BMI calculator, solar sizing tool.">
+<meta name="description" content="Free professional network engineering tools: subnet calculator, IP range calculator, fiber loss, dBm converter, bandwidth calculator.">
+<meta name="keywords" content="subnet calculator, fiber tools, dBm converter, network tools, IP calculator, bandwidth calculator">
 
 <link rel="stylesheet" href="style.css">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header class="header">
-  <div class="logo">Network Toolkit</div>
-  <button onclick="toggleDarkMode()">Dark Mode</button>
+  <div class="logo">⚡ NetTools Pro</div>
+  <button onclick="toggleDark()">🌙</button>
 </header>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Engineering Tools in One Place</h1>
-  <p>Subnetting, Fiber, dBm, BMI and Solar calculators — simple and fast.</p>
+  <h1>Professional Network Engineering Toolkit</h1>
+  <p>Fast, accurate and free tools for engineers, students & IT professionals.</p>
 </section>
 
-<!-- TOOL CARDS -->
+<!-- TOOL GRID -->
 <section class="grid">
 
-  <div class="card" onclick="showTool('subnet')">
-    Subnet Calculator
+  <div class="card" onclick="show('subnet')">
+    📡 Subnet Calculator
   </div>
 
-  <div class="card" onclick="showTool('fiber')">
-    Fiber Loss Tool
+  <div class="card" onclick="show('ip')">
+    🌐 IP Range Calculator
   </div>
 
-  <div class="card" onclick="showTool('dbm')">
-    dBm Converter
+  <div class="card" onclick="show('dbm')">
+    🔌 dBm Converter
   </div>
 
-  <div class="card" onclick="showTool('bmi')">
-    BMI Calculator
+  <div class="card" onclick="show('fiber')">
+    🔦 Fiber Loss Tool
   </div>
 
-  <div class="card" onclick="showTool('solar')">
-    Solar Calculator
+  <div class="card" onclick="show('bandwidth')">
+    📶 Bandwidth Calculator
   </div>
 
 </section>
@@ -55,46 +59,45 @@
 
 <section id="subnet" class="tool active">
   <h2>Subnet Calculator</h2>
-  <input id="prefix" type="number" placeholder="CIDR e.g. 24">
+  <input id="prefix" placeholder="CIDR e.g. 24">
   <button onclick="calcSubnet()">Calculate</button>
   <div id="subnetResult"></div>
 </section>
 
-<section id="fiber" class="tool">
-  <h2>Fiber Loss Calculator</h2>
-  <input id="distance" type="number" placeholder="Distance (km)">
-  <input id="loss" type="number" placeholder="Loss per km">
-  <button onclick="calcFiber()">Calculate</button>
-  <div id="fiberResult"></div>
+<section id="ip" class="tool">
+  <h2>IP Range Calculator</h2>
+  <input id="ipInput" placeholder="192.168.1.0">
+  <input id="cidr" placeholder="/24">
+  <button onclick="calcIP()">Calculate</button>
+  <div id="ipResult"></div>
 </section>
 
 <section id="dbm" class="tool">
   <h2>dBm Converter</h2>
-  <input id="dbmInput" type="number" placeholder="dBm">
+  <input id="dbmInput" placeholder="dBm value">
   <button onclick="convertDbm()">Convert</button>
   <div id="dbmResult"></div>
 </section>
 
-<section id="bmi" class="tool">
-  <h2>BMI Calculator</h2>
-  <input id="weight" type="number" placeholder="Weight (kg)">
-  <input id="height" type="number" placeholder="Height (cm)">
-  <button onclick="calcBMI()">Calculate</button>
-  <div id="bmiResult"></div>
+<section id="fiber" class="tool">
+  <h2>Fiber Link Budget Calculator</h2>
+  <input id="distance" placeholder="Distance (km)">
+  <input id="loss" placeholder="Loss per km (0.35)">
+  <button onclick="calcFiber()">Calculate</button>
+  <div id="fiberResult"></div>
 </section>
 
-<section id="solar" class="tool">
-  <h2>Solar Calculator</h2>
-  <input id="bill" type="number" placeholder="Bill (PKR)">
-  <input id="sunHours" type="number" placeholder="Sun hours/day">
-  <button onclick="calcSolar()">Calculate</button>
-  <div id="solarResult"></div>
+<section id="bandwidth" class="tool">
+  <h2>Bandwidth Calculator</h2>
+  <input id="mbps" placeholder="Mbps">
+  <button onclick="calcBandwidth()">Convert</button>
+  <div id="bwResult"></div>
 </section>
 
 </div>
 
-<footer class="footer">
-  <p>© 2026 Network Toolkit</p>
+<footer>
+  <p>© 2026 NetTools Pro | Built for Engineers</p>
 </footer>
 
 <script src="script.js"></script>
