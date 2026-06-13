@@ -5,7 +5,6 @@ body{
   color:#111;
 }
 
-/* HEADER */
 .header{
   display:flex;
   justify-content:space-between;
@@ -14,22 +13,15 @@ body{
   color:white;
 }
 
-.logo{
-  font-weight:800;
-}
-
-/* HERO */
 .hero{
   text-align:center;
-  padding:40px 20px;
-  background:linear-gradient(180deg,#eef2ff,#ffffff);
+  padding:35px 20px;
 }
 
 .hero h1{
-  font-size:30px;
+  font-size:28px;
 }
 
-/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
@@ -39,19 +31,18 @@ body{
 
 .card{
   background:white;
-  padding:25px;
-  border-radius:15px;
+  padding:20px;
+  border-radius:12px;
   text-align:center;
   cursor:pointer;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
   transition:0.2s;
 }
 
 .card:hover{
-  transform:scale(1.05);
+  transform:scale(1.04);
 }
 
-/* TOOL */
 .tool-box{
   padding:20px;
 }
@@ -60,8 +51,8 @@ body{
   display:none;
   background:white;
   padding:20px;
-  border-radius:15px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
 }
 
 .tool.active{
@@ -70,10 +61,10 @@ body{
 
 input{
   width:100%;
-  padding:12px;
+  padding:10px;
   margin:8px 0;
-  border:1px solid #ddd;
   border-radius:8px;
+  border:1px solid #ddd;
 }
 
 button{
@@ -85,7 +76,14 @@ button{
   cursor:pointer;
 }
 
-/* DARK MODE */
+.info{
+  background:#eef2ff;
+  padding:10px;
+  border-left:4px solid #2563eb;
+  border-radius:6px;
+  font-size:14px;
+}
+
 .dark{
   background:#0f172a;
   color:white;
@@ -95,4 +93,8 @@ button{
 .dark .tool{
   background:#1e293b;
   color:white;
+}
+
+.dark .info{
+  background:#0b1220;
 }
