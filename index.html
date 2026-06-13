@@ -4,33 +4,33 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>NetTools Pro | Engineering Calculator Suite</title>
+<title>CCNA Pro Toolkit | Networking & Conversion Tools</title>
 
-<meta name="description" content="Professional network engineering toolkit with subnet, IP range, fiber optics, bandwidth calculators and learning guides.">
+<meta name="description" content="CCNA professional toolkit with subnet calculator, binary converter, IP range, dBm converter and networking fundamentals.">
 
 <link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header class="header">
-  <div class="logo">⚡ NetTools Pro</div>
+  <div class="logo">⚡ CCNA Pro Toolkit</div>
   <button onclick="toggleDark()">🌙</button>
 </header>
 
 <section class="hero">
-  <h1>Learn While You Calculate</h1>
-  <p>Professional tools for network engineers, students & telecom technicians.</p>
+  <h1>Learn + Calculate + Understand Networking</h1>
+  <p>Professional CCNA tools with definitions and standard reference values</p>
 </section>
 
+<!-- TOOL CARDS -->
 <section class="grid">
 
   <div class="card" onclick="show('subnet')">📡 Subnet Calculator</div>
-  <div class="card" onclick="show('ip')">🌐 IP Range Calculator</div>
-  <div class="card" onclick="show('fiber')">🔦 Fiber Link Budget</div>
-  <div class="card" onclick="show('bandwidth')">📶 Bandwidth Tool</div>
+  <div class="card" onclick="show('binary')">🔢 Binary Converter</div>
+  <div class="card" onclick="show('ip')">🌐 IP Range</div>
+  <div class="card" onclick="show('dbm')">🔌 dBm Converter</div>
+  <div class="card" onclick="show('bandwidth')">📶 Bandwidth</div>
 
 </section>
 
@@ -39,18 +39,46 @@
 <!-- SUBNET -->
 <section id="subnet" class="tool active">
 
-<h2>Subnet Calculator (Proper Networking Model)</h2>
+<h2>Subnet Calculator</h2>
 
 <p class="info">
-<b>Learn:</b> Subnetting divides a network into smaller networks using CIDR (Classless Inter-Domain Routing).
+<b>Definition:</b> Subnetting divides a network into smaller logical networks using CIDR.
 </p>
 
-<input id="ip" placeholder="Enter IP (e.g. 192.168.1.10)">
+<p class="info">
+<b>Standard Values:</b><br>
+IPv4 = 32 bits<br>
+/24 = 256 IPs<br>
+/25 = 128 IPs
+</p>
+
+<input id="ip" placeholder="IP Address (e.g. 192.168.1.10)">
 <input id="cidr" type="number" placeholder="CIDR (e.g. 24)">
 
 <button onclick="calcSubnet()">Calculate</button>
 
 <div id="subnetResult"></div>
+
+</section>
+
+<!-- BINARY -->
+<section id="binary" class="tool">
+
+<h2>Binary Converter</h2>
+
+<p class="info">
+<b>Definition:</b> Binary is base-2 number system used in networking.
+</p>
+
+<p class="info">
+<b>Standard:</b> 1 byte = 8 bits
+</p>
+
+<input id="binaryInput" placeholder="Enter Decimal or Binary">
+
+<button onclick="convertBinary()">Convert</button>
+
+<div id="binaryResult"></div>
 
 </section>
 
@@ -60,11 +88,15 @@
 <h2>IP Range Calculator</h2>
 
 <p class="info">
-<b>Learn:</b> Network address = first IP, Broadcast = last IP in subnet range.
+<b>Definition:</b> Determines usable IP range inside a subnet.
 </p>
 
-<input id="ip2" placeholder="Enter IP (e.g. 192.168.1.10)">
-<input id="cidr2" type="number" placeholder="CIDR (e.g. 24)">
+<p class="info">
+<b>Standard:</b> First IP = Network, Last IP = Broadcast
+</p>
+
+<input id="ipInput" placeholder="IP (e.g. 192.168.1.10)">
+<input id="cidr2" type="number" placeholder="CIDR">
 
 <button onclick="calcIP()">Calculate</button>
 
@@ -72,33 +104,38 @@
 
 </section>
 
-<!-- FIBER -->
-<section id="fiber" class="tool">
+<!-- DBM -->
+<section id="dbm" class="tool">
 
-<h2>Fiber Link Budget Calculator</h2>
+<h2>dBm Converter</h2>
 
 <p class="info">
-<b>Learn:</b> Fiber loss depends on distance, attenuation (dB/km), connectors and splices.
+<b>Definition:</b> dBm measures optical/electrical power in telecom.
 </p>
 
-<input id="distance" type="number" placeholder="Distance (km)">
-<input id="attenuation" type="number" placeholder="Loss per km (e.g. 0.35)">
-<input id="connector" type="number" placeholder="Connector loss (dB)">
-<input id="splice" type="number" placeholder="Splice loss (dB)">
+<p class="info">
+<b>Standard:</b> 0 dBm = 1 mW
+</p>
 
-<button onclick="calcFiber()">Calculate</button>
+<input id="dbmInput" type="number" placeholder="dBm">
 
-<div id="fiberResult"></div>
+<button onclick="convertDbm()">Convert</button>
+
+<div id="dbmResult"></div>
 
 </section>
 
 <!-- BANDWIDTH -->
 <section id="bandwidth" class="tool">
 
-<h2>Bandwidth Calculator</h2>
+<h2>Bandwidth Converter</h2>
 
 <p class="info">
-<b>Learn:</b> Internet speed in Mbps can be converted to download speed in MB/s (divide by 8).
+<b>Definition:</b> Converts network speed to real download speed.
+</p>
+
+<p class="info">
+<b>Standard:</b> 1 Mbps = 0.125 MB/s
 </p>
 
 <input id="mbps" type="number" placeholder="Speed in Mbps">
@@ -112,7 +149,7 @@
 </div>
 
 <footer>
-<p>© 2026 NetTools Pro | Built for Engineers</p>
+<p>© 2026 CCNA Pro Toolkit | Learn Networking Professionally</p>
 </footer>
 
 <script src="script.js"></script>
