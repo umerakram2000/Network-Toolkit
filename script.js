@@ -1,98 +1,87 @@
-body{
-  margin:0;
-  font-family:Inter, sans-serif;
-  background:#f5f7ff;
-  color:#111;
+function show(id){
+  document.querySelectorAll(".tool").forEach(t=>t.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
 }
 
-/* HEADER */
-.header{
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-  background:linear-gradient(90deg,#2563eb,#7c3aed);
-  color:white;
+function toggleDark(){
+  document.body.classList.toggle("dark");
 }
 
-.logo{
-  font-weight:800;
+/* ---------------- SUBNET ---------------- */
+function calcSubnet(){
+  let ip = document.getElementById("ip").value;
+  let cidr = parseInt(document.getElementById("cidr").value);
+
+  if(!ip || isNaN(cidr)){
+    document.getElementById("subnetResult").innerHTML = "Enter valid IP and CIDR";
+    return;
+  }
+
+  let hosts = Math.pow(2,32-cidr)-2;
+
+  document.getElementById("subnetResult").innerHTML =
+    `
+    <b>IP:</b> ${ip}<br>
+    <b>CIDR:</b> /${cidr}<br>
+    <b>Usable Hosts:</b> ${hosts}
+    `;
 }
 
-/* HERO */
-.hero{
-  text-align:center;
-  padding:40px 20px;
-  background:linear-gradient(180deg,#eef2ff,#ffffff);
+/* ---------------- IP RANGE ---------------- */
+function calcIP(){
+  let ip = document.getElementById("ip2").value;
+  let cidr = parseInt(document.getElementById("cidr2").value);
+
+  if(!ip || isNaN(cidr)){
+    document.getElementById("ipResult").innerHTML = "Enter valid values";
+    return;
+  }
+
+  let total = Math.pow(2,32-cidr);
+
+  document.getElementById("ipResult").innerHTML =
+    `
+    <b>Network:</b> ${ip}/${cidr}<br>
+    <b>Total IPs:</b> ${total}<br>
+    <b>Note:</b> First = Network, Last = Broadcast
+    `;
 }
 
-.hero h1{
-  font-size:30px;
+/* ---------------- FIBER ---------------- */
+function calcFiber(){
+  let d = parseFloat(document.getElementById("distance").value);
+  let a = parseFloat(document.getElementById("attenuation").value);
+  let c = parseFloat(document.getElementById("connector").value);
+  let s = parseFloat(document.getElementById("splice").value);
+
+  if(isNaN(d)||isNaN(a)||isNaN(c)||isNaN(s)){
+    document.getElementById("fiberResult").innerHTML = "Enter all values";
+    return;
+  }
+
+  let loss = (d*a) + c + s;
+
+  document.getElementById("fiberResult").innerHTML =
+    `
+    <b>Total Loss:</b> ${loss.toFixed(2)} dB<br>
+    <b>Status:</b> ${loss < 20 ? "Good Link" : "Weak Signal"}
+    `;
 }
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:15px;
-  padding:20px;
-}
+/* ---------------- BANDWIDTH ---------------- */
+function calcBandwidth(){
+  let mbps = parseFloat(document.getElementById("mbps").value);
 
-.card{
-  background:white;
-  padding:25px;
-  border-radius:15px;
-  text-align:center;
-  cursor:pointer;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
-  transition:0.2s;
-}
+  if(isNaN(mbps)){
+    document.getElementById("bwResult").innerHTML = "Enter speed";
+    return;
+  }
 
-.card:hover{
-  transform:scale(1.05);
-}
+  let mbs = mbps / 8;
 
-/* TOOL */
-.tool-box{
-  padding:20px;
-}
-
-.tool{
-  display:none;
-  background:white;
-  padding:20px;
-  border-radius:15px;
-  box-shadow:0 10px 20px rgba(0,0,0,0.08);
-}
-
-.tool.active{
-  display:block;
-}
-
-input{
-  width:100%;
-  padding:12px;
-  margin:8px 0;
-  border:1px solid #ddd;
-  border-radius:8px;
-}
-
-button{
-  padding:10px 15px;
-  background:#2563eb;
-  color:white;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-/* DARK MODE */
-.dark{
-  background:#0f172a;
-  color:white;
-}
-
-.dark .card,
-.dark .tool{
-  background:#1e293b;
-  color:white;
+  document.getElementById("bwResult").innerHTML =
+    `
+    <b>Download Speed:</b> ${mbs.toFixed(2)} MB/s<br>
+    <b>Tip:</b> 100 Mbps ≈ 12.5 MB/s
+    `;
 }
