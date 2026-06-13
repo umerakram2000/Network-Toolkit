@@ -4,84 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CCNA Pro Toolkit | Network Tools & Converters</title>
+<title>CCNA Pro Toolkit | Network Calculators & Learning Tools</title>
 
-<meta name="description" content="CCNA subnet calculator, IP range tool, binary converter, dBm converter and bandwidth calculator with learning explanations.">
+<meta name="description" content="Professional CCNA toolkit with subnet calculator, IP range tool, binary converter, dBm converter and bandwidth calculator with learning explanations.">
 
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
-  <h2>⚡ CCNA Pro Toolkit</h2>
+<header class="header">
+  <div class="logo">⚡ CCNA Pro Toolkit</div>
   <button onclick="toggleDark()">🌙</button>
 </header>
 
-<div class="menu">
+<section class="hero">
+  <h1>CCNA Learning + Calculator Platform</h1>
+  <p>Calculate, learn and understand networking concepts step by step</p>
+</section>
 
-  <button onclick="show('subnet')">Subnet</button>
-  <button onclick="show('convert')">Converter</button>
-  <button onclick="show('ip')">IP Range</button>
-  <button onclick="show('dbm')">dBm</button>
-  <button onclick="show('bw')">Bandwidth</button>
+<!-- TOOL CARDS -->
+<section class="grid">
 
-</div>
+  <div class="card" onclick="show('subnet')">📡 Subnet Calculator</div>
+  <div class="card" onclick="show('convert')">🔢 Binary Converter</div>
+  <div class="card" onclick="show('ip')">🌐 IP Range Tool</div>
+  <div class="card" onclick="show('dbm')">🔌 dBm Converter</div>
+  <div class="card" onclick="show('bandwidth')">📶 Bandwidth Tool</div>
 
-<div class="container">
+</section>
+
+<!-- TOOL CONTAINER -->
+<div class="tool-box">
 
 <!-- SUBNET -->
 <section id="subnet" class="tool active">
-<h3>Subnet Calculator</h3>
+<h2>Subnet Calculator</h2>
+<p class="info">Learn how networks are divided using CIDR notation.</p>
 
-<p class="info">
-CIDR defines network bits. Example: /24 = 256 IPs (8 host bits).
-</p>
-
-<input id="ip" placeholder="IP (e.g. 192.168.1.10)">
-<input id="cidr" type="number" placeholder="CIDR (0-32)">
-
+<input id="ip" placeholder="IP Address (e.g. 192.168.1.10)">
+<input id="cidr" type="number" placeholder="CIDR (e.g. 24)">
 <button onclick="calcSubnet()">Calculate</button>
+
 <div id="subnetResult"></div>
 </section>
 
 <!-- CONVERTER -->
 <section id="convert" class="tool">
-<h3>Number System Converter</h3>
+<h2>Binary / Hex / Decimal / Octal Converter</h2>
+<p class="info">Understand how computers represent numbers in different systems.</p>
 
-<p class="info">
-Binary (base2), Decimal (base10), Hex (base16), Octal (base8)
-</p>
-
-<input id="convInput" placeholder="Enter any value">
+<input id="convInput" placeholder="Enter value">
 <button onclick="convertAll()">Convert</button>
 
 <div id="convResult"></div>
 </section>
 
-<!-- IP RANGE -->
-<section id="ip" class="tool">
-<h3>IP Range Calculator</h3>
-
-<p class="info">
-Find Network, Broadcast, First & Last usable IP.
-</p>
-
-<input id="ipInput" placeholder="IP Address">
-<input id="cidr2" type="number" placeholder="CIDR">
-
-<button onclick="calcIP()">Calculate</button>
-
-<div id="ipResult"></div>
-</section>
-
 <!-- DBM -->
 <section id="dbm" class="tool">
-<h3>dBm Converter</h3>
-
-<p class="info">
-dBm measures optical/RF power. 0 dBm = 1 mW.
-</p>
+<h2>dBm Converter</h2>
+<p class="info">Measure signal power in fiber and wireless systems.</p>
 
 <input id="dbmInput" type="number" placeholder="Enter dBm">
 <button onclick="convertDbm()">Convert</button>
@@ -90,15 +72,12 @@ dBm measures optical/RF power. 0 dBm = 1 mW.
 </section>
 
 <!-- BANDWIDTH -->
-<section id="bw" class="tool">
-<h3>Bandwidth Converter</h3>
-
-<p class="info">
-Convert Mbps to real download speed (MB/s).
-</p>
+<section id="bandwidth" class="tool">
+<h2>Bandwidth Calculator</h2>
+<p class="info">Convert network speed into real download speed.</p>
 
 <input id="mbps" type="number" placeholder="Mbps">
-<button onclick="calcBW()">Convert</button>
+<button onclick="calcBandwidth()">Convert</button>
 
 <div id="bwResult"></div>
 </section>
@@ -106,7 +85,7 @@ Convert Mbps to real download speed (MB/s).
 </div>
 
 <footer>
-<p>CCNA Toolkit © 2026</p>
+<p>© 2026 CCNA Pro Toolkit | Built for Networking Students & Engineers</p>
 </footer>
 
 <script src="script.js"></script>
