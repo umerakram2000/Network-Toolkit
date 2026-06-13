@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Network Toolkit</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+  <h1>Network Engineer Toolkit</h1>
+  <button onclick="toggleDarkMode()">Dark Mode</button>
+</header>
+
+<nav>
+  <button onclick="showTool('subnet')">Subnet</button>
+  <button onclick="showTool('dbm')">dBm</button>
+  <button onclick="showTool('fiber')">Fiber</button>
+  <button onclick="showTool('bmi')">BMI</button>
+  <button onclick="showTool('solar')">Solar</button>
+</nav>
+
+<main>
+
+<!-- SUBNET -->
+<section id="subnet" class="tool active">
+  <h2>Subnet Calculator</h2>
+  <input id="prefix" type="number" placeholder="Prefix e.g. 24">
+  <button onclick="calcSubnet()">Calculate</button>
+  <div id="subnetResult"></div>
+</section>
+
+<!-- DBM -->
+<section id="dbm" class="tool">
+  <h2>dBm Converter</h2>
+  <input id="dbmInput" type="number" placeholder="dBm value">
+  <button onclick="convertDbm()">Convert</button>
+  <div id="dbmResult"></div>
+</section>
+
+<!-- FIBER -->
+<section id="fiber" class="tool">
+  <h2>Fiber Loss Calculator</h2>
+  <input id="distance" type="number" placeholder="Distance (km)">
+  <input id="loss" type="number" placeholder="Loss per km">
+  <button onclick="calcFiber()">Calculate</button>
+  <div id="fiberResult"></div>
+</section>
+
+<!-- BMI -->
+<section id="bmi" class="tool">
+  <h2>BMI Calculator</h2>
+  <input id="weight" type="number" placeholder="Weight (kg)">
+  <input id="height" type="number" placeholder="Height (cm)">
+  <button onclick="calcBMI()">Calculate</button>
+  <div id="bmiResult"></div>
+</section>
+
+<!-- SOLAR -->
+<section id="solar" class="tool">
+  <h2>Solar Calculator</h2>
+  <input id="bill" type="number" placeholder="Electricity bill (PKR)">
+  <input id="sunHours" type="number" placeholder="Sun hours">
+  <button onclick="calcSolar()">Calculate</button>
+  <div id="solarResult"></div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+
+</body>
+</html>
