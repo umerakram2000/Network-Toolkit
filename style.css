@@ -1,7 +1,7 @@
 body{
   margin:0;
-  font-family:Arial;
-  background:#f6f7fb;
+  font-family:Inter, sans-serif;
+  background:#f5f7ff;
   color:#111;
 }
 
@@ -10,38 +10,48 @@ body{
   display:flex;
   justify-content:space-between;
   padding:15px;
-  background:#111827;
+  background:linear-gradient(90deg,#2563eb,#7c3aed);
   color:white;
+}
+
+.logo{
+  font-weight:800;
 }
 
 /* HERO */
 .hero{
   text-align:center;
   padding:40px 20px;
+  background:linear-gradient(180deg,#eef2ff,#ffffff);
 }
 
 .hero h1{
-  font-size:28px;
+  font-size:30px;
 }
 
 /* GRID */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:12px;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
   padding:20px;
 }
 
 .card{
   background:white;
-  padding:20px;
-  border-radius:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  padding:25px;
+  border-radius:15px;
   text-align:center;
   cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  transition:0.2s;
 }
 
-/* TOOL BOX */
+.card:hover{
+  transform:scale(1.05);
+}
+
+/* TOOL */
 .tool-box{
   padding:20px;
 }
@@ -50,8 +60,8 @@ body{
   display:none;
   background:white;
   padding:20px;
-  border-radius:12px;
-  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  border-radius:15px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
 }
 
 .tool.active{
@@ -60,8 +70,10 @@ body{
 
 input{
   width:100%;
-  padding:10px;
+  padding:12px;
   margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
 }
 
 button{
