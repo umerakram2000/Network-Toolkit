@@ -1,45 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Network Toolkit</title>
+<title>Network Engineer Toolkit | Subnet, Fiber, Solar Calculators</title>
 
-  <link rel="stylesheet" href="style.css">
+<meta name="description" content="Free professional toolkit for network engineers: subnet calculator, fiber loss, dBm converter, BMI calculator, solar sizing tool.">
+
+<meta name="keywords" content="subnet calculator, fiber loss calculator, dBm converter, solar calculator, BMI calculator, network tools">
+
+<meta name="author" content="Network Toolkit">
+
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+<header class="header">
   <h1>Network Engineer Toolkit</h1>
-  <button onclick="toggleDarkMode()">Dark Mode</button>
+  <button onclick="toggleDarkMode()">🌙</button>
 </header>
 
-<nav>
+<nav class="nav">
+  <button onclick="showTool('home')">Home</button>
   <button onclick="showTool('subnet')">Subnet</button>
-  <button onclick="showTool('dbm')">dBm</button>
   <button onclick="showTool('fiber')">Fiber</button>
+  <button onclick="showTool('dbm')">dBm</button>
   <button onclick="showTool('bmi')">BMI</button>
   <button onclick="showTool('solar')">Solar</button>
 </nav>
 
-<main>
+<main class="container">
 
-<!-- SUBNET -->
-<section id="subnet" class="tool active">
-  <h2>Subnet Calculator</h2>
-  <input id="prefix" type="number" placeholder="Prefix e.g. 24">
-  <button onclick="calcSubnet()">Calculate</button>
-  <div id="subnetResult"></div>
+<!-- HOME -->
+<section id="home" class="tool active">
+  <h2>Professional Network Toolkit</h2>
+  <p>All essential engineering calculators in one place.</p>
+
+  <div class="grid">
+    <div class="card">Subnet Calculator</div>
+    <div class="card">Fiber Loss Tool</div>
+    <div class="card">dBm Converter</div>
+    <div class="card">BMI Checker</div>
+    <div class="card">Solar Sizing Tool</div>
+  </div>
 </section>
 
-<!-- DBM -->
-<section id="dbm" class="tool">
-  <h2>dBm Converter</h2>
-  <input id="dbmInput" type="number" placeholder="dBm value">
-  <button onclick="convertDbm()">Convert</button>
-  <div id="dbmResult"></div>
+<!-- SUBNET -->
+<section id="subnet" class="tool">
+  <h2>Subnet Calculator</h2>
+  <input id="prefix" type="number" placeholder="CIDR (e.g. 24)">
+  <button onclick="calcSubnet()">Calculate</button>
+  <div id="subnetResult"></div>
 </section>
 
 <!-- FIBER -->
@@ -49,6 +62,14 @@
   <input id="loss" type="number" placeholder="Loss per km">
   <button onclick="calcFiber()">Calculate</button>
   <div id="fiberResult"></div>
+</section>
+
+<!-- DBM -->
+<section id="dbm" class="tool">
+  <h2>dBm Converter</h2>
+  <input id="dbmInput" type="number" placeholder="dBm">
+  <button onclick="convertDbm()">Convert</button>
+  <div id="dbmResult"></div>
 </section>
 
 <!-- BMI -->
@@ -62,14 +83,18 @@
 
 <!-- SOLAR -->
 <section id="solar" class="tool">
-  <h2>Solar Calculator</h2>
-  <input id="bill" type="number" placeholder="Electricity bill (PKR)">
-  <input id="sunHours" type="number" placeholder="Sun hours">
+  <h2>Solar System Calculator</h2>
+  <input id="bill" type="number" placeholder="Monthly bill (PKR)">
+  <input id="sunHours" type="number" placeholder="Sun hours/day">
   <button onclick="calcSolar()">Calculate</button>
   <div id="solarResult"></div>
 </section>
 
 </main>
+
+<footer class="footer">
+  <p>© 2026 Network Engineer Toolkit | Free Engineering Tools</p>
+</footer>
 
 <script src="script.js"></script>
 
