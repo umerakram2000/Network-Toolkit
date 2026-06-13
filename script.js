@@ -7,109 +7,131 @@ function toggleDark(){
   document.body.classList.toggle("dark");
 }
 
-/* ================================
-   HELPERS
-================================ */
-function validateIP(ip){
+/* =========================
+   VALIDATION HELPERS
+========================= */
+
+function isValidIP(ip){
   let parts = ip.split(".");
   if(parts.length !== 4) return false;
-  return parts.every(p => {
+
+  return parts.every(p=>{
+    if(p === "") return false;
     let n = Number(p);
-    return n >= 0 && n <= 255 && p !== "";
+    return n >= 0 && n <= 255 && Number.isInteger(n);
   });
 }
 
-/* ================================
-   SUBNET ENGINE (REAL CCNA LOGIC)
-================================ */
+/* =========================
+   IP TO 32-BIT NUMBER
+========================= */
+
+function ipToInt(ip){
+  return ip.split(".").reduce((acc,oct)=>{
+    return (acc << 8) + Number(oct);
+  },0) >>> 0;
+}
+
+/* =========================
+   INT TO IP
+========================= */
+
+function intToIp(num){
+  return [
+    (num >>> 24) & 255,
+    (num >>> 16) & 255,
+    (num >>> 8) & 255,
+    num & 255
+  ].join(".");
+}
+
+/* =========================
+   SUBNET ENGINE (ACCURATE)
+========================= */
+
 function calcSubnet(){
 
   let ip = document.getElementById("ip").value.trim();
   let cidr = Number(document.getElementById("cidr").value);
 
-  if(!validateIP(ip) || cidr < 0 || cidr > 32){
+  if(!isValidIP(ip) || cidr < 0 || cidr > 32){
     document.getElementById("subnetResult").innerHTML =
       "<b style='color:red'>Invalid IP or CIDR</b>";
     return;
   }
 
-  let ipParts = ip.split(".").map(Number);
+  let ipInt = ipToInt(ip);
+
+  // subnet mask
+  let mask = cidr === 0 ? 0 : (0xFFFFFFFF << (32 - cidr)) >>> 0;
+
+  let network = ipInt & mask;
+  let broadcast = network | (~mask >>> 0);
 
   let hostBits = 32 - cidr;
-  let totalHosts = Math.pow(2, hostBits);
-  let usableHosts = hostBits <= 1 ? 0 : totalHosts - 2;
+  let totalIps = Math.pow(2, hostBits);
+  let usable = hostBits <= 1 ? 0 : totalIps - 2;
 
-  // subnet mask calculation
-  let mask = [];
-  for(let i=0;i<4;i++){
-    let bits = Math.min(8, Math.max(0, cidr - i*8));
-    mask.push(256 - Math.pow(2, 8-bits));
-  }
-
-  // wildcard mask
-  let wildcard = mask.map(m => 255 - m);
+  let wildcard = (~mask >>> 0);
 
   document.getElementById("subnetResult").innerHTML = `
-    <b>IP:</b> ${ip}<br>
-    <b>CIDR:</b> /${cidr}<br><br>
+    <b>INPUT:</b> ${ip}/${cidr}<br><br>
 
-    <b>Subnet Mask:</b> ${mask.join(".")}<br>
-    <b>Wildcard Mask:</b> ${wildcard.join(".")}<br><br>
+    <b>Subnet Mask:</b> ${intToIp(mask)}<br>
+    <b>Wildcard Mask:</b> ${intToIp(wildcard)}<br><br>
 
-    <b>Total IPs:</b> ${totalHosts}<br>
-    <b>Usable Hosts:</b> ${usableHosts}<br><br>
+    <b>Network Address:</b> ${intToIp(network)}<br>
+    <b>Broadcast Address:</b> ${intToIp(broadcast)}<br><br>
 
-    <b>Bits:</b> ${cidr} Network / ${hostBits} Host
+    <b>Total IPs:</b> ${totalIps}<br>
+    <b>Usable Hosts:</b> ${usable}<br><br>
+
+    <b>Host Bits:</b> ${hostBits}<br>
+    <b>Network Bits:</b> ${cidr}
   `;
 }
 
-/* ================================
-   IP RANGE (REAL NETWORK LOGIC)
-================================ */
+/* =========================
+   IP RANGE ENGINE (REAL)
+========================= */
+
 function calcIP(){
 
   let ip = document.getElementById("ipInput").value.trim();
   let cidr = Number(document.getElementById("cidr2").value);
 
-  if(!validateIP(ip) || cidr < 0 || cidr > 32){
+  if(!isValidIP(ip) || cidr < 0 || cidr > 32){
     document.getElementById("ipResult").innerHTML =
       "<b style='color:red'>Invalid input</b>";
     return;
   }
 
-  let ipNum = ip.split(".").reduce((acc,v)=>acc*256+Number(v),0);
+  let ipInt = ipToInt(ip);
 
   let mask = cidr === 0 ? 0 : (0xFFFFFFFF << (32 - cidr)) >>> 0;
 
-  let network = ipNum & mask;
+  let network = ipInt & mask;
   let broadcast = network | (~mask >>> 0);
 
-  function toIP(num){
-    return [
-      (num>>>24)&255,
-      (num>>>16)&255,
-      (num>>>8)&255,
-      num&255
-    ].join(".");
-  }
-
-  let total = Math.pow(2, 32-cidr);
-  let usable = total > 2 ? total - 2 : 0;
+  let total = Math.pow(2, 32 - cidr);
+  let usable = total <= 2 ? 0 : total - 2;
 
   document.getElementById("ipResult").innerHTML = `
-    <b>Network:</b> ${toIP(network)}<br>
-    <b>Broadcast:</b> ${toIP(broadcast)}<br>
-    <b>First Host:</b> ${toIP(network+1)}<br>
-    <b>Last Host:</b> ${toIP(broadcast-1)}<br><br>
+    <b>Network Address:</b> ${intToIp(network)}<br>
+    <b>First Host:</b> ${usable ? intToIp(network + 1) : "N/A"}<br>
+    <b>Last Host:</b> ${usable ? intToIp(broadcast - 1) : "N/A"}<br>
+    <b>Broadcast:</b> ${intToIp(broadcast)}<br><br>
 
     <b>Total IPs:</b> ${total}<br>
     <b>Usable Hosts:</b> ${usable}
   `;
 }
 
-/* ================================
-   UNIVERSAL CONVERTER (SAFE)
-================================ */
+/* =========================
+   UNIVERSAL CONVERTER
+   (Binary / Decimal / Hex / Octal)
+========================= */
+
 function convertAll(){
 
   let input = document.getElementById("convInput").value.trim();
@@ -122,7 +144,7 @@ function convertAll(){
 
   let num;
 
-  // detect input type
+  // detect format safely
   if(/^[01]+$/.test(input)){
     num = parseInt(input,2);
   }
@@ -140,41 +162,43 @@ function convertAll(){
 
   document.getElementById("convResult").innerHTML = `
     <b>Decimal:</b> ${num}<br>
-    <b>Binary:</b> ${num.toString(2)}</br>
+    <b>Binary:</b> ${num.toString(2)}<br>
     <b>Hex:</b> ${num.toString(16).toUpperCase()}<br>
     <b>Octal:</b> ${num.toString(8)}<br><br>
 
-    <b>Bits used in networking:</b> ${num.toString(2).length}
+    <b>Bit Length:</b> ${num.toString(2).length}
   `;
 }
 
-/* ================================
-   DBM (REAL CONTEXT)
-================================ */
+/* =========================
+   DBM CONVERTER
+========================= */
+
 function convertDbm(){
 
   let dbm = Number(document.getElementById("dbmInput").value);
 
   if(isNaN(dbm)){
     document.getElementById("dbmResult").innerHTML =
-      "<b style='color:red'>Invalid value</b>";
+      "<b style='color:red'>Invalid input</b>";
     return;
   }
 
-  let mw = Math.pow(10, dbm/10);
+  let mw = Math.pow(10, dbm / 10);
 
   document.getElementById("dbmResult").innerHTML = `
-    <b>dBm:</b> ${dbm}<br>
+    <b>dBm Input:</b> ${dbm}<br>
     <b>Power:</b> ${mw.toFixed(6)} mW<br><br>
 
-    <b>Meaning:</b> Signal strength used in fiber & RF systems<br>
-    <b>Reference:</b> 0 dBm = 1 mW
+    <b>Meaning:</b> Optical/RF signal strength level<br>
+    <b>Reference:</b> 0 dBm = 1 milliwatt
   `;
 }
 
-/* ================================
-   BANDWIDTH (REALISTIC VIEW)
-================================ */
+/* =========================
+   BANDWIDTH ENGINE
+========================= */
+
 function calcBandwidth(){
 
   let mbps = Number(document.getElementById("mbps").value);
@@ -185,14 +209,14 @@ function calcBandwidth(){
     return;
   }
 
-  let mbs = mbps / 8;
-  let real = mbs * 0.85; // realistic throughput
+  let theoretical = mbps / 8;
+  let real = theoretical * 0.85;
 
   document.getElementById("bwResult").innerHTML = `
-    <b>Speed:</b> ${mbps} Mbps<br>
-    <b>Theoretical:</b> ${mbs.toFixed(2)} MB/s<br>
+    <b>Input Speed:</b> ${mbps} Mbps<br>
+    <b>Theoretical:</b> ${theoretical.toFixed(2)} MB/s<br>
     <b>Real World (~85%):</b> ${real.toFixed(2)} MB/s<br><br>
 
-    <b>Note:</b> ISP overhead + latency reduces actual speed
+    <b>Note:</b> Protocol overhead reduces real throughput
   `;
 }
