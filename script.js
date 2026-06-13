@@ -1,60 +1,98 @@
-function showTool(id){
-  document.querySelectorAll(".tool").forEach(t => t.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:#f5f7ff;
+  color:#111;
 }
 
-/* SUBNET */
-function calcSubnet(){
-  let p = parseInt(document.getElementById("prefix").value);
-  let hosts = Math.pow(2,32-p)-2;
-  document.getElementById("subnetResult").innerHTML =
-    "Usable Hosts: " + hosts;
+/* HEADER */
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+  background:linear-gradient(90deg,#2563eb,#7c3aed);
+  color:white;
 }
 
-/* DBM */
-function convertDbm(){
-  let dbm = parseFloat(document.getElementById("dbmInput").value);
-  let mw = Math.pow(10, dbm/10);
-  document.getElementById("dbmResult").innerHTML =
-    mw.toFixed(4) + " mW";
+.logo{
+  font-weight:800;
 }
 
-/* FIBER */
-function calcFiber(){
-  let d = parseFloat(document.getElementById("distance").value);
-  let l = parseFloat(document.getElementById("loss").value);
-  document.getElementById("fiberResult").innerHTML =
-    "Loss: " + (d*l).toFixed(2) + " dB";
+/* HERO */
+.hero{
+  text-align:center;
+  padding:40px 20px;
+  background:linear-gradient(180deg,#eef2ff,#ffffff);
 }
 
-/* BMI */
-function calcBMI(){
-  let w = parseFloat(document.getElementById("weight").value);
-  let h = parseFloat(document.getElementById("height").value)/100;
-  let bmi = w/(h*h);
-
-  let status =
-    bmi<18.5?"Underweight":
-    bmi<25?"Normal":
-    bmi<30?"Overweight":"Obese";
-
-  document.getElementById("bmiResult").innerHTML =
-    bmi.toFixed(2)+" ("+status+")";
+.hero h1{
+  font-size:30px;
 }
 
-/* SOLAR */
-function calcSolar(){
-  let bill = parseFloat(document.getElementById("bill").value);
-  let sun = parseFloat(document.getElementById("sunHours").value);
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:15px;
+  padding:20px;
+}
 
-  let units = bill/50;
-  let size = (units/30)/sun;
+.card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  text-align:center;
+  cursor:pointer;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+  transition:0.2s;
+}
 
-  document.getElementById("solarResult").innerHTML =
-    size.toFixed(2)+" kW required";
+.card:hover{
+  transform:scale(1.05);
+}
+
+/* TOOL */
+.tool-box{
+  padding:20px;
+}
+
+.tool{
+  display:none;
+  background:white;
+  padding:20px;
+  border-radius:15px;
+  box-shadow:0 10px 20px rgba(0,0,0,0.08);
+}
+
+.tool.active{
+  display:block;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  margin:8px 0;
+  border:1px solid #ddd;
+  border-radius:8px;
+}
+
+button{
+  padding:10px 15px;
+  background:#2563eb;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 /* DARK MODE */
-function toggleDarkMode(){
-  document.body.classList.toggle("dark");
+.dark{
+  background:#0f172a;
+  color:white;
+}
+
+.dark .card,
+.dark .tool{
+  background:#1e293b;
+  color:white;
 }
