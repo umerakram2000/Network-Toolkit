@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>CCNA Pro Toolkit | Networking & Conversion Tools</title>
+<title>CCNA Pro Toolkit | Networking Learning + Calculators</title>
 
-<meta name="description" content="CCNA professional toolkit with subnet calculator, binary converter, IP range, dBm converter and networking fundamentals.">
+<meta name="description" content="Advanced CCNA toolkit with subnet, CIDR explanation, binary hex octal converter, IP range calculator, dBm and bandwidth tools.">
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -19,37 +19,40 @@
 </header>
 
 <section class="hero">
-  <h1>Learn + Calculate + Understand Networking</h1>
-  <p>Professional CCNA tools with definitions and standard reference values</p>
+  <h1>Learn Networking While You Calculate</h1>
+  <p>Professional CCNA tools with deep explanations and real-world values</p>
 </section>
 
 <!-- TOOL CARDS -->
 <section class="grid">
 
-  <div class="card" onclick="show('subnet')">📡 Subnet Calculator</div>
-  <div class="card" onclick="show('binary')">🔢 Binary Converter</div>
+  <div class="card" onclick="show('subnet')">📡 CIDR & Subnet</div>
+  <div class="card" onclick="show('convert')">🔢 Number Converter</div>
   <div class="card" onclick="show('ip')">🌐 IP Range</div>
-  <div class="card" onclick="show('dbm')">🔌 dBm Converter</div>
+  <div class="card" onclick="show('dbm')">🔌 dBm Tool</div>
   <div class="card" onclick="show('bandwidth')">📶 Bandwidth</div>
 
 </section>
 
 <div class="tool-box">
 
-<!-- SUBNET -->
+<!-- SUBNET + CIDR -->
 <section id="subnet" class="tool active">
 
-<h2>Subnet Calculator</h2>
+<h2>CIDR & Subnet Calculator</h2>
 
 <p class="info">
-<b>Definition:</b> Subnetting divides a network into smaller logical networks using CIDR.
+<b>What is CIDR?</b><br>
+CIDR (Classless Inter-Domain Routing) defines how many bits are used for network portion.
+Example: /24 means 24 bits network, 8 bits host.
 </p>
 
 <p class="info">
 <b>Standard Values:</b><br>
-IPv4 = 32 bits<br>
 /24 = 256 IPs<br>
-/25 = 128 IPs
+/25 = 128 IPs<br>
+/26 = 64 IPs<br>
+IPv4 = 32 bits total
 </p>
 
 <input id="ip" placeholder="IP Address (e.g. 192.168.1.10)">
@@ -61,24 +64,30 @@ IPv4 = 32 bits<br>
 
 </section>
 
-<!-- BINARY -->
-<section id="binary" class="tool">
+<!-- CONVERTER (ALL IN ONE) -->
+<section id="convert" class="tool">
 
-<h2>Binary Converter</h2>
+<h2>Binary / Decimal / Hex / Octal Converter</h2>
 
 <p class="info">
-<b>Definition:</b> Binary is base-2 number system used in networking.
+<b>What is number system?</b><br>
+Networking uses binary (base-2). Humans use decimal (base-10).
+Hex is used in MAC addresses and memory addressing.
 </p>
 
 <p class="info">
-<b>Standard:</b> 1 byte = 8 bits
+<b>Standards:</b><br>
+Binary = base 2<br>
+Decimal = base 10<br>
+Hex = base 16<br>
+Octal = base 8
 </p>
 
-<input id="binaryInput" placeholder="Enter Decimal or Binary">
+<input id="convInput" placeholder="Enter any value">
 
-<button onclick="convertBinary()">Convert</button>
+<button onclick="convertAll()">Convert All</button>
 
-<div id="binaryResult"></div>
+<div id="convResult"></div>
 
 </section>
 
@@ -88,11 +97,9 @@ IPv4 = 32 bits<br>
 <h2>IP Range Calculator</h2>
 
 <p class="info">
-<b>Definition:</b> Determines usable IP range inside a subnet.
-</p>
-
-<p class="info">
-<b>Standard:</b> First IP = Network, Last IP = Broadcast
+<b>What is IP Range?</b><br>
+It defines usable IP addresses inside a subnet.
+First IP = Network Address, Last IP = Broadcast Address.
 </p>
 
 <input id="ipInput" placeholder="IP (e.g. 192.168.1.10)">
@@ -107,17 +114,18 @@ IPv4 = 32 bits<br>
 <!-- DBM -->
 <section id="dbm" class="tool">
 
-<h2>dBm Converter</h2>
+<h2>dBm Converter (Power Level)</h2>
 
 <p class="info">
-<b>Definition:</b> dBm measures optical/electrical power in telecom.
+<b>What is dBm?</b><br>
+dBm is a unit of power in telecom.
+It shows signal strength in fiber and wireless systems.
 </p>
 
 <p class="info">
-<b>Standard:</b> 0 dBm = 1 mW
-</p>
+<b>Standard:</b> 0 dBm = 1 mW</p>
 
-<input id="dbmInput" type="number" placeholder="dBm">
+<input id="dbmInput" type="number" placeholder="Enter dBm">
 
 <button onclick="convertDbm()">Convert</button>
 
@@ -131,12 +139,13 @@ IPv4 = 32 bits<br>
 <h2>Bandwidth Converter</h2>
 
 <p class="info">
-<b>Definition:</b> Converts network speed to real download speed.
+<b>What is Bandwidth?</b><br>
+Bandwidth is data transfer rate of a network.
+Higher Mbps = faster download speed.
 </p>
 
 <p class="info">
-<b>Standard:</b> 1 Mbps = 0.125 MB/s
-</p>
+<b>Standard:</b> 1 Mbps = 0.125 MB/s</p>
 
 <input id="mbps" type="number" placeholder="Speed in Mbps">
 
