@@ -7,81 +7,55 @@ function toggleDark(){
   document.body.classList.toggle("dark");
 }
 
-/* ---------------- SUBNET ---------------- */
+/* SUBNET */
 function calcSubnet(){
   let ip = document.getElementById("ip").value;
   let cidr = parseInt(document.getElementById("cidr").value);
 
-  if(!ip || isNaN(cidr)){
-    document.getElementById("subnetResult").innerHTML = "Enter valid IP and CIDR";
-    return;
-  }
-
   let hosts = Math.pow(2,32-cidr)-2;
 
   document.getElementById("subnetResult").innerHTML =
-    `
-    <b>IP:</b> ${ip}<br>
-    <b>CIDR:</b> /${cidr}<br>
-    <b>Usable Hosts:</b> ${hosts}
-    `;
+    `<b>IP:</b> ${ip}<br><b>Usable Hosts:</b> ${hosts}`;
 }
 
-/* ---------------- IP RANGE ---------------- */
-function calcIP(){
-  let ip = document.getElementById("ip2").value;
-  let cidr = parseInt(document.getElementById("cidr2").value);
+/* BINARY */
+function convertBinary(){
+  let val = document.getElementById("binaryInput").value;
 
-  if(!ip || isNaN(cidr)){
-    document.getElementById("ipResult").innerHTML = "Enter valid values";
-    return;
+  if(/^[01]+$/.test(val)){
+    document.getElementById("binaryResult").innerHTML =
+      "Decimal: " + parseInt(val,2);
+  } else {
+    document.getElementById("binaryResult").innerHTML =
+      "Binary: " + Number(val).toString(2);
   }
+}
+
+/* IP RANGE */
+function calcIP(){
+  let ip = document.getElementById("ipInput").value;
+  let cidr = parseInt(document.getElementById("cidr2").value);
 
   let total = Math.pow(2,32-cidr);
 
   document.getElementById("ipResult").innerHTML =
-    `
-    <b>Network:</b> ${ip}/${cidr}<br>
-    <b>Total IPs:</b> ${total}<br>
-    <b>Note:</b> First = Network, Last = Broadcast
-    `;
+    `<b>Network:</b> ${ip}/${cidr}<br><b>Total IPs:</b> ${total}`;
 }
 
-/* ---------------- FIBER ---------------- */
-function calcFiber(){
-  let d = parseFloat(document.getElementById("distance").value);
-  let a = parseFloat(document.getElementById("attenuation").value);
-  let c = parseFloat(document.getElementById("connector").value);
-  let s = parseFloat(document.getElementById("splice").value);
+/* DBM */
+function convertDbm(){
+  let dbm = parseFloat(document.getElementById("dbmInput").value);
+  let mw = Math.pow(10, dbm/10);
 
-  if(isNaN(d)||isNaN(a)||isNaN(c)||isNaN(s)){
-    document.getElementById("fiberResult").innerHTML = "Enter all values";
-    return;
-  }
-
-  let loss = (d*a) + c + s;
-
-  document.getElementById("fiberResult").innerHTML =
-    `
-    <b>Total Loss:</b> ${loss.toFixed(2)} dB<br>
-    <b>Status:</b> ${loss < 20 ? "Good Link" : "Weak Signal"}
-    `;
+  document.getElementById("dbmResult").innerHTML =
+    mw.toFixed(4) + " mW (0 dBm = 1 mW)";
 }
 
-/* ---------------- BANDWIDTH ---------------- */
+/* BANDWIDTH */
 function calcBandwidth(){
   let mbps = parseFloat(document.getElementById("mbps").value);
-
-  if(isNaN(mbps)){
-    document.getElementById("bwResult").innerHTML = "Enter speed";
-    return;
-  }
-
-  let mbs = mbps / 8;
+  let mbs = mbps/8;
 
   document.getElementById("bwResult").innerHTML =
-    `
-    <b>Download Speed:</b> ${mbs.toFixed(2)} MB/s<br>
-    <b>Tip:</b> 100 Mbps ≈ 12.5 MB/s
-    `;
+    mbs.toFixed(2) + " MB/s";
 }
